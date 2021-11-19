@@ -1,48 +1,92 @@
 body {
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: auto;
-    max-width: 600px;
-    margin-bottom: 250px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin: auto;
+  max-width: 600px;
+  margin-bottom: 250px;
 }
-
 h1 {
-    color: navy;
+  color: navy;
 }
-
 .green {
-    color: green;
+  color: green;
 }
-
+.bordered {
+  border: 2px solid gold;
+}
 .title-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
 }
-
 button {
-    cursor: pointer;
-    background-color: navy;
-    color: white;
+  cursor: pointer;
+  background-color: navy;
+  color: white;
 }
-
 button:hover {
-    transform: scale(1.1);
-    background-color: blue;
+  transform: scale(1.1);
+  background-color: blue;
 }
-
 .grid-container {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    width: 160px;
-    grid-gap: 8px;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  width: 160px;
+  grid-gap: 8px;
 }
-
 .grid-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid gold;
-    width: 80px;
-    height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 40px;
+  border: 2px solid gold;
+}
+.solar-system {
+  width: 600px;
+  height: 600px;
+  transition: transform 100s;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+.solar-system:hover {
+  transform: rotate(3600deg);
+}
+.solar-system .grid-item-planet {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.solar-system .grid-item-planet .planet {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: crimson;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.solar-system .grid-item-sun {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.solar-system .grid-item-sun .sun {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  background-color: orange;
+}
+.space {
+  background-color: black;
+}
+.center-planet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
