@@ -1,0 +1,79 @@
+:root {
+    --red: #e77;
+    --green: #6d6;
+    --grey: #655;
+;}
+
+button {
+    min-width: 150px;
+    min-height: 100px;
+    color: white;
+    margin: 10px;
+    border: none;
+    border-radius: 200px;
+}
+
+.wide {
+    min-width: 320px;
+}
+
+.grey {
+    background-color: var(--grey);
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.red {
+    background-color: var(--red);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vw;
+    margin-bottom: 20px;
+}
+
+.all-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.kanji {
+    font-size: 150px;
+    padding: none;
+    margin: none;
+    height: 250;
+}
+
+.word {
+    font-size: 40px;
+}
+
+.top-content {
+    margin-top: 40px;
+}
+
+#set-up {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 20px;
+}
+
+#results {
+    margin-bottom: 50px;
+}
+
+button:hover {
+    cursor: pointer;
+}

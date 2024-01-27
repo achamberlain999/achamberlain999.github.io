@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RTK</title>
+    <!-- Additional meta tags, stylesheets, or scripts can be added here -->
+    <script src="kanji.js"></script>
+    <link rel="stylesheet" href="kanji.css" />
+</head>
+<body>
+    <div class="all-content">
+        <div class="top-content">
+            <div id="progress"></div>
+            <div id="word" class="word"></div>
+        </div>
+        <div id="kanji" class="kanji"></div>
+
+        <div id="set-up">
+            <label for="min">Min kanji index:</label>
+            <input id="min" type="number" value="1" />
+            <label for="max">Max kanji index:</label>
+            <input id="max" type="number" value="550" />
+            <label for="number-to-test">Number to test (0 for all)</label>
+            <input id="number-to-test" type="number" value="0" />
+        </div>
+        
+        <div id="show-button-container" class="button-container">
+            <button class="wide grey" id="show-button">START</button>
+        </div>
+        
+        <div id="vote-buttons-container" class="button-container">
+            <button class="green" id="remember-button">REMEMBERED</button>
+            <button class="red" id="forgot-button">FORGOT</button>
+        </div>
+
+        <div id="results">
+            <div id="stats">
+            </div>
+            
+            <div id="forgotten-list">
+                <!-- Add forgotten kanji to this list -->
+            </div>
+
+            <button id="copy-results">Copy results</button>
+        </div>
+    </div>
+</body>
+</html>
