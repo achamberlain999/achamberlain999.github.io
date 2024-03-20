@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const minKanji = document.getElementById("min");
     const maxKanji = document.getElementById("max");
     const numberToTest = document.getElementById("number-to-test");
+    const darkMode = document.getElementById("dark-mode");
     
     const setUpInputs = document.getElementById("set-up");
 
@@ -35,9 +36,52 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
     let started = false;
 
-    showMainButton();
 
-    const setUp = () => {
+    const pageSetUp = () => {
+        storageMin = localStorage.getItem("minKanji");
+        storageMax = localStorage.getItem("maxKanji");
+        storageDarkModeString = localStorage.getItem("darkMode");
+        let storageDarkMode;
+
+        if (storageDarkModeString === null) {
+            storageDarkMode = null;
+        } else {
+            storageDarkMode = storageDarkModeString === "true";
+        }
+
+        console.log("storage variables", storageMin, storageMax, storageDarkMode);
+
+        if (storageMin !== null) {
+            minKanji.value = storageMin
+        }
+
+        if (storageMax !== null) {
+            maxKanji.value = storageMax
+        }
+
+        if (storageDarkMode !== null) {
+            darkMode.checked = storageDarkMode;
+            updateDarkMode(storageDarkMode);
+        } else {
+            localStorage.setItem("darkMode", false);
+        }
+    }
+
+    const updateDarkMode = (isDarkModeOn) => {
+        const backgroundColour = isDarkModeOn === true ? "var(--black)" : "var(--white)";
+        const textColour = isDarkModeOn === true ? "var(--white)" : "var(--black)";
+        document.documentElement.style.setProperty('--background', backgroundColour);
+        document.documentElement.style.setProperty('--text', textColour);
+    }
+
+    pageSetUp();
+
+    const setKanjiLimitsStorage = () => {
+        localStorage.setItem("minKanji", minKanji.value)
+        localStorage.setItem("maxKanji", maxKanji.value)
+    }
+
+    const onStartSetUp = () => {
         const min = Number(minKanji.value)
         const max = Number(maxKanji.value)
         const count = Number(numberToTest.value)
@@ -56,12 +100,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         setUpInputs.style.display = "none";
         resultsBox.style.display = "none";
+
+        setKanjiLimitsStorage();
     }
     
     const newWord = (kanji) => {
         wordBox.textContent = kanji.word;
         kanjiBox.textContent = kanji.kanji;
-        kanjiBox.style.color = "white";
+        kanjiBox.style.color = "var(--background)";
         showingKanji = false;
         progressBox.textContent = `${currentIndex + 1}/${allKanjiToTest.length}`
         showMainButton();
@@ -79,14 +125,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     showButton.onclick = () => {
         if (!started) {
-            setUp();
+            onStartSetUp();
             started = true;
             showButton.textContent = "SHOW"
             return
         }
 
         showVoteButtons();
-        kanjiBox.style.color = "black";
+        kanjiBox.style.color = "var(--text)";
     };
 
     const handleNewKanji = () => {
@@ -94,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentIndex >= allKanjiToTest.length) {
             showResults();
             setUpInputs.style.display = "flex";
-            kanjiBox.style.color = "white";
+            kanjiBox.style.color = "var(--background)";;
             wordBox.textContent = "";
             progressBox.textContent = "";
             started = false;
@@ -113,6 +159,13 @@ document.addEventListener("DOMContentLoaded", () => {
         forgotten.push(allKanjiToTest[currentIndex])
 
         handleNewKanji();
+    }
+
+    
+    darkMode.onchange = (event) => {
+        const isDarkModeOn = event.currentTarget.checked;
+        localStorage.setItem("darkMode", isDarkModeOn);
+        updateDarkMode(isDarkModeOn);
     }
 
     const showResults = () => {
@@ -135,6 +188,8 @@ document.addEventListener("DOMContentLoaded", () => {
         navigator.clipboard.writeText(forgotten.map(x => `${x.kanji} ${x.word}`).join('\n'))
         alert("Copied to clipboard")
     }
+
+    showMainButton();
 })
 
 const allKanji = [
