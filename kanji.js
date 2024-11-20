@@ -5,6 +5,21 @@ const STATES = {
     "ENDED": 3
 }
 
+const shuffle_fy = (array) => {
+    // See this fascinating visualisation: https://bost.ocks.org/mike/shuffle/compare.html
+    let arrayCopy = [...array];
+    let ci = arrayCopy.length;
+  
+    while (ci != 0) {
+      let ri = Math.floor(Math.random() * ci);
+      ci--;
+  
+      [arrayCopy[ci], arrayCopy[ri]] = [arrayCopy[ri], arrayCopy[ci]];
+    }
+
+    return arrayCopy;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const showButtonContainer = document.getElementById("show-button-container");
     const showButton = document.getElementById("show-button");
@@ -93,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         started = false;
 
         const filteredKanji = allKanji.filter(x => x.id <= max && x.id >= min);
-        const shuffledKanji = filteredKanji.sort(() => Math.random() - 0.5);
+        const shuffledKanji = shuffle_fy(filteredKanji);
         allKanjiToTest = shuffledKanji.slice(0, number);
 
         newWord(allKanjiToTest[currentIndex]);
